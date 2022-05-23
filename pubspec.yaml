@@ -1,0 +1,44 @@
+name: bulx_task_app
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.0.1
+  bloc: ^8.0.3
+  confetti: ^0.7.0
+  sizer: ^2.0.15
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+
+  # example:
+  fonts:
+    - family: SFProDisplay
+      fonts:
+        - asset: assets/fonts/FontsFree-Net-SFProDisplay-Black.ttf
+    - family: SFProText
+      fonts:
+        - asset: assets/fonts/FontsFree-Net-SFProText-Regular.ttf
+    - family: SFProText-Semibold
+      fonts:
+        - asset: assets/fonts/FontsFree-Net-SFProText-Semibold.ttf
