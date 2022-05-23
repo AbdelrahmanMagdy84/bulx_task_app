@@ -1,8 +1,7 @@
-
-import 'package:bulx_task_app/widgets/savings_widgets/confetti_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import 'confetti_widget.dart';
 import 'savings_money_widget.dart';
 
 class SavingsCard extends StatelessWidget {

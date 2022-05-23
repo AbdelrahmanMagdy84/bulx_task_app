@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../bloc/savings/cubit/savings_cubit.dart';
-import '../widgets/savings_widgets/savings_card.dart';
+import '../widgets/savings/savings_card.dart';
 
-class HomePageScreen extends StatelessWidget {
+
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
