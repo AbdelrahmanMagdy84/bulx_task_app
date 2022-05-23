@@ -17,6 +17,8 @@ dependencies:
   bloc: ^8.0.3
   confetti: ^0.7.0
   sizer: ^2.0.15
+  mccounting_text: ^1.0.0
+  visibility_detector: ^0.3.3
 
 dev_dependencies:
   flutter_test:
