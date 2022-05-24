@@ -10,7 +10,7 @@ class SavingsCubit extends Cubit<SavingsState> {
   final ConfettiController _controllerBottomCenter =
       ConfettiController(duration: const Duration(seconds: 1));
 
-  double _savings = 202030.20;
+  double _savings = 2020.20;
 
   double getSavingsAmount() => _savings;
 
@@ -26,7 +26,6 @@ class SavingsCubit extends Cubit<SavingsState> {
   }
 
   void play() {
-    print(state);
     if (state is SavingsReady || state is SavingsInitial) {
       emit(SavingsPlaying());
       Future.delayed(const Duration(seconds: 1), () {
@@ -34,10 +33,5 @@ class SavingsCubit extends Cubit<SavingsState> {
         emit(SavingsIdeal());
       });
     }
-  }
-
-  void stop() {
-    _controllerBottomCenter.stop();
-    emit(SavingsIdeal());
   }
 }
