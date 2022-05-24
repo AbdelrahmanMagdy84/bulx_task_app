@@ -2,7 +2,6 @@ import 'package:bulx_task_app/bloc/savings/cubit/savings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-
 import 'screens/home_screen.dart';
 
 void main() {
@@ -27,6 +26,7 @@ class MyApp extends StatelessWidget {
               elevation: 0,
               toolbarHeight: 12.h,
             ),
+            canvasColor: Colors.white,
             primarySwatch: Colors.blue,
           ),
           home: HomeScreen(),

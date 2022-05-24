@@ -2,8 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
 part 'savings_state.dart';
 
 class SavingsCubit extends Cubit<SavingsState> {
@@ -12,7 +10,7 @@ class SavingsCubit extends Cubit<SavingsState> {
   final ConfettiController _controllerBottomCenter =
       ConfettiController(duration: const Duration(seconds: 1));
 
-  double _savings = 20000.20;
+  double _savings = 202030.20;
 
   double getSavingsAmount() => _savings;
 
@@ -23,13 +21,19 @@ class SavingsCubit extends Cubit<SavingsState> {
     return _controllerBottomCenter;
   }
 
-  void play() {
-    emit(SavingsPlaying());
+  void ready() {
+    emit(SavingsReady());
+  }
 
-    Future.delayed(const Duration(seconds: 1), () {
-      _controllerBottomCenter.play();
-      emit(SavingsIdeal());
-    });
+  void play() {
+    print(state);
+    if (state is SavingsReady || state is SavingsInitial) {
+      emit(SavingsPlaying());
+      Future.delayed(const Duration(seconds: 1), () {
+        _controllerBottomCenter.play();
+        emit(SavingsIdeal());
+      });
+    }
   }
 
   void stop() {

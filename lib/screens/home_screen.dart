@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../bloc/savings/cubit/savings_cubit.dart';
 import '../widgets/savings/savings_card.dart';
-
+import '../widgets/shared/best_image_size.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -10,31 +11,29 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Container(
-            margin: const EdgeInsets.symmetric(vertical: 20),
-            child: Image.asset(
-              "assets/images/logo.png",
-              fit: BoxFit.fill,
-            ),
+          title: SizedBox(
+            width: 13.w,
+            child: selectImageBasedOnDeviceSize("logo"),
           ),
         ),
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               VisibilityDetector(
                 key: const Key('my-widget-key'),
                 onVisibilityChanged: (visibilityInfo) {
                   var visiblePercentage = visibilityInfo.visibleFraction * 100;
-                  if (visiblePercentage == 100) {
+                  if (visiblePercentage <= 5) {
+                    SavingsCubit.get(context).ready();
+                  } else if (visiblePercentage == 100) {
                     SavingsCubit.get(context).play();
-                  } else {
-                    SavingsCubit.get(context).stop();
                   }
                 },
                 child: SavingsCard(),
               ),
               Container(
-                  color: Colors.black, height: 2000, width: double.infinity)
+                  color: Colors.white, height: 2000, width: double.infinity)
             ],
           ),
         ),
