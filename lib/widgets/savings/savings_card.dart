@@ -7,12 +7,10 @@ import 'confetti_widget.dart';
 import 'savings_money_widget.dart';
 
 class SavingsCard extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
       height: isPortrait(context) ? 13.h : 25.w,
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(12)),
         color: Color(0xffebf9fb),
