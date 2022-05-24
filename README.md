@@ -5,7 +5,7 @@ I have made to behavior for this task:
      code: https://github.com/AbdelrahmanMagdy84/bulx_task_app.git
      demo:
      
-     ![first](https://user-images.githubusercontent.com/45487306/170101337-1c9a4790-1387-478f-8db0-16e43d3d5dc9.gif)
+![first](https://user-images.githubusercontent.com/45487306/170101337-1c9a4790-1387-478f-8db0-16e43d3d5dc9.gif)
 
      
   2- the second in the creating_confetti_animation branch 
