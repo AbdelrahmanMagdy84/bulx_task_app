@@ -10,5 +10,5 @@ class SavingsIdeal extends SavingsState {}
 //class SavingsVisible extends SavingsState {}
 
 //class SavingsInvisible extends SavingsState {}
-
+class SavingsReady extends SavingsState {}
 class SavingsPlaying extends SavingsState {}

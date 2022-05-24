@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../helpers/orientation_function.dart';
+import '../shared/best_image_size.dart';
 import 'confetti_widget.dart';
 import 'savings_money_widget.dart';
 
 class SavingsCard extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizerUtil.orientation == Orientation.portrait ? 13.h : 20.w,
+      height: isPortrait(context) ? 13.h : 25.w,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(12)),
         color: Color(0xffebf9fb),
       ),
-      child: savingsStackBuilder(),
+      child: savingsStackBuilder(context),
     );
   }
 
   List<Widget> stackDecoration() {
     return [
-      Positioned(
-        top: 0,
-        child: Image.asset(
-          "assets/images/arrow.png",
-        ),
-      ),
-      Positioned(
-        top: 0,
-        right: 0,
-        child: Image.asset(
-          "assets/images/star.png",
-        ),
-      ),
+      Positioned(top: 0, child: selectImageBasedOnDeviceSize("arrow")),
+      Positioned(top: 0, right: 0, child: selectImageBasedOnDeviceSize("star")),
       Positioned(
         bottom: 0,
         child: Align(
@@ -43,9 +35,7 @@ class SavingsCard extends StatelessWidget {
                 width: 80,
                 alignment: Alignment.bottomRight,
               ),
-              Image.asset(
-                "assets/images/heart.png",
-              ),
+              selectImageBasedOnDeviceSize("heart")
             ],
           ),
         ),
@@ -57,7 +47,7 @@ class SavingsCard extends StatelessWidget {
     ];
   }
 
-  Stack savingsStackBuilder() {
+  Stack savingsStackBuilder(BuildContext context) {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
@@ -71,13 +61,19 @@ class SavingsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Your Total Savings",
-                    style: TextStyle(
-                        color: const Color(0xff75808a),
-                        fontWeight: FontWeight.w600,
-                        fontFamily: "SFProText",
-                        fontSize: SizerUtil.width >= 350 ? 3.5.w : 2.5.w),
+                  SizedBox(
+                    width: isPortrait(context) ? 30.w : 30.h,
+                    child: const FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        "Your Total Savings",
+                        style: TextStyle(
+                          color: const Color(0xff75808a),
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "SFProText",
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 10,

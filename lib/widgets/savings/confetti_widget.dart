@@ -1,35 +1,36 @@
 import 'dart:math';
+import 'package:bulx_task_app/helpers/shaps_path_builder.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../bloc/savings/cubit/savings_cubit.dart';
 
-
 class CustomConfettiWidget extends StatelessWidget {
-  
-  
-  Path drawStar(Size size) {
-    size = const Size(12, 12);
-    double degToRad(double deg) => deg * (pi / 180.0);
-    const numberOfPoints = 10;
-    final halfWidth = size.width / 2;
-    final externalRadius = halfWidth;
-    final internalRadius = halfWidth / 2.5;
-    final degreesPerStep = degToRad(360 / numberOfPoints);
-    final halfDegreesPerStep = degreesPerStep / 2;
-    final path = Path();
-    final fullAngle = degToRad(360);
-    path.moveTo(size.width, halfWidth);
+  final List<MaterialColor> colors = const [
+    Colors.yellow,
+    Colors.red,
+    Colors.orange,
+    Colors.purple,
+    Colors.green,
+    Colors.blue,
+    Colors.pink,
+    Colors.orange,
+    Colors.purple
+  ];
+  double degToRad(double deg) => deg * (pi / 180.0);
 
-    for (double step = 0; step < fullAngle; step += degreesPerStep) {
-      path.lineTo(halfWidth + externalRadius * cos(step),
-          halfWidth + externalRadius * sin(step));
-      path.lineTo(halfWidth + internalRadius * cos(step + halfDegreesPerStep),
-          halfWidth + internalRadius * sin(step + halfDegreesPerStep));
-    }
+  Path drawStar(Size size) {
+    final path = Path();
+    starPathBuilder(path, degToRad);
     path.close();
     return path;
+  }
+
+  Path drawShap1(Size size) {
+    final path0 = Path();
+    pathBuilder(path0);
+    return path0;
   }
 
   @override
@@ -47,24 +48,30 @@ class CustomConfettiWidget extends StatelessWidget {
       height: height,
       width: width,
       alignment: Alignment.bottomCenter,
-      child: ConfettiWidget(
-        canvas: Size.fromRadius(height),
-        confettiController: SavingsCubit.get(context).getConfettiController(),
-        blastDirectionality: BlastDirectionality.explosive,
-        colors: const [
-          Colors.green,
-          Colors.blue,
-          Colors.pink,
-          Colors.orange,
-          Colors.purple
+      child: Stack(
+        children: [
+          confettiBuilder(context, drawStar),
+          confettiBuilder(context, drawShap1)
         ],
-        createParticlePath: drawStar,
-        emissionFrequency: 0.02,
-        maxBlastForce: 10,
-        minBlastForce: 7,
-        numberOfParticles: 50,
-        gravity: 0.05,
       ),
+    );
+  }
+
+  ConfettiWidget confettiBuilder(
+      BuildContext context, Path Function(Size) draw) {
+    return ConfettiWidget(
+      confettiController: SavingsCubit.get(context).getConfettiController(),
+      blastDirection: degToRad(270),
+      particleDrag: .1,
+      emissionFrequency: 0.05,
+      numberOfParticles: 20,
+      minBlastForce: 0.1,
+      maxBlastForce: 3,
+      gravity: 0.09,
+      colors: colors,
+      strokeWidth: 0.00,
+      strokeColor: Colors.white,
+      createParticlePath: draw,
     );
   }
 }
