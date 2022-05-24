@@ -21,39 +21,48 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         body: NestedScrollView(
-            controller: scrollController,
-            headerSliverBuilder: (context, boool) {
-              return [
-                SliverAppBar(
-                  pinned: false,
-                  toolbarHeight: isPortrait(context) ? 13.h : 25.w,
-                  snap: false,
-                  floating: true,
-                  title: VisibilityDetector(
-                    key: const Key('my-widget-key'),
-                    onVisibilityChanged: (visibilityInfo) {
-                      var visiblePercentage =
-                          visibilityInfo.visibleFraction * 100;
-                      if (visiblePercentage <= 5) {
-                        SavingsCubit.get(context).ready();
-                      } else if (visiblePercentage == 100) {
-                        SavingsCubit.get(context).play();
-                      }
-                    },
-                    child: SavingsCard(),
-                  ),
-                )
-              ];
-            },
-            dragStartBehavior: DragStartBehavior.down,
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                      color: Colors.white, height: 2000, width: double.infinity)
-                ],
+          controller: scrollController,
+          headerSliverBuilder: (context, boool) {
+            return [
+              SliverAppBar(
+                pinned: false,
+                toolbarHeight: isPortrait(context) ? 13.h : 25.w,
+                snap: false,
+                floating: true,
+                title: VisibilityDetector(
+                  key: const Key('my-widget-key'),
+                  onVisibilityChanged: (visibilityInfo) {
+                    var visiblePercentage =
+                        visibilityInfo.visibleFraction * 100;
+                    if (visiblePercentage <= 5) {
+                      SavingsCubit.get(context).ready();
+                    } else if (visiblePercentage == 100) {
+                      SavingsCubit.get(context).play();
+                    }
+                  },
+                  child: SavingsCard(),
+                ),
               ),
-            )),
+            ];
+          },
+          body: Padding(
+            padding: const EdgeInsets.all(30),
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Container(
+                  color: Colors.yellow,
+                  height: 300,
+                ),
+                Card(
+                  child: Container(
+                    color: Colors.lightBlue,
+                    height: 300,
+                  ),
+                ),
+              ]),
+            ),
+          ),
+        ),
       ),
     );
   }

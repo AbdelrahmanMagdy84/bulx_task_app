@@ -8,6 +8,7 @@ import '../shared/best_image_size.dart';
 
 class SavingsMoneyWidget extends StatelessWidget {
   const SavingsMoneyWidget({Key? key}) : super(key: key);
+
   TextStyle moneyTextStyle([double textSize = 20]) => TextStyle(
       color: const Color(0xff101112),
       fontWeight: FontWeight.bold,
@@ -16,14 +17,12 @@ class SavingsMoneyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return SizedBox(
       height: isPortrait(context) ? 4.h : 10.w,
       width: isPortrait(context) ? 40.w : 40.h,
       child: LayoutBuilder(
         builder: (context, constraint) {
           final maxWidth = constraint.maxWidth / 100;
-
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -31,8 +30,8 @@ class SavingsMoneyWidget extends StatelessWidget {
                 flex: 1,
                 child: Container(
                   padding: const EdgeInsets.only(right: 5),
-                  child:
-                      selectImageBasedOnDeviceSize("savingsIcon", maxWidth * 15),
+                  child: selectImageBasedOnDeviceSize(
+                      "savingsIcon", maxWidth * 15),
                 ),
               ),
               Flexible(
@@ -63,7 +62,6 @@ class SavingsMoneyWidget extends StatelessWidget {
                                 begin: state is SavingsPlaying ? 0 : savings,
                                 precision: 2,
                                 end: savings,
-                                //textScaleFactor: 1,
                                 style: moneyTextStyle(savings >= 999999
                                     ? maxWidth * 10
                                     : maxWidth * 13),
