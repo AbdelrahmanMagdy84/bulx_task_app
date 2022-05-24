@@ -13,4 +13,4 @@ I have made to behavior for this task:
      demo:
           
           
-![second][(https://user-images.githubusercontent.com/45487306/170101337-1c9a4790-1387-478f-8db0-16e43d3d5dc9.gif](https://user-images.githubusercontent.com/45487306/170099628-a831071c-80de-4167-a014-0ce40efa2d39.gif))
+![second][(https://user-images.githubusercontent.com/45487306/170101337-1c9a4790-1387-478f-8db0-16e43d3d5dc9.gif]
