@@ -1,8 +1,10 @@
-import 'package:bulx_task_app/bloc/cubit/animated_container_cubit.dart';
+
+import 'package:bulx_task_app/bloc/savings_animated_content/cubit/animated_container_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mccounting_text/mccounting_text.dart';
-import '../../bloc/savings/cubit/savings_cubit.dart';
+
+import '../../bloc/savings_content/cubit/savings_cubit.dart';
 import '../shared/best_image_size.dart';
 
 class SavingsMoneyWidget extends StatelessWidget {
@@ -43,21 +45,21 @@ class SavingsMoneyWidget extends StatelessWidget {
                   child: Text("EGP ", style: moneyTextStyle()),
                 ),
               ),
-              BlocBuilder<AnimatedContainerCubit, AnimatedContainerState>(
+              BlocBuilder<SavingsAnimatedCardCubit, SavingsAnimatedCardState>(
                   builder: (context, state) {
-                double savings = SavingsCubit.get(context).getSavingsAmount();
+                double savings = SavingsContentCubit.get(context).getSavingsAmount();
                 return Flexible(
                   flex: 2,
                   fit: FlexFit.tight,
                   child: SizedBox(
                     child: FittedBox(
                       child: McCountingText(
-                        begin: state.isAnimated ? 0 : savings,
+                        begin: state is SavingsAnimatedCardPlayingState  ? 0 : savings,
                         precision: 2,
                         end: savings,
                         style: moneyTextStyle(),
                         maxLines: 1,
-                        duration: SavingsCubit.get(context)
+                        duration: SavingsContentCubit.get(context)
                             .moneyCountAnimationDuration,
                         curve: Curves.linear,
                         key: Key("x"),

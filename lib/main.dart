@@ -1,8 +1,10 @@
-import 'package:bulx_task_app/bloc/savings/cubit/savings_cubit.dart';
+
+import 'package:bulx_task_app/bloc/savings_animated_content/cubit/animated_container_cubit.dart';
+import 'package:bulx_task_app/bloc/savings_content/cubit/savings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'bloc/cubit/animated_container_cubit.dart';
+
 import 'screens/home_screen.dart';
 
 void main() {
@@ -18,10 +20,10 @@ class MyApp extends StatelessWidget {
       return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => SavingsCubit(),
+            create: (context) => SavingsContentCubit(),
           ),
           BlocProvider(
-            create: (context) => AnimatedContainerCubit(),
+            create: (context) => SavingsAnimatedCardCubit(),
           ),
         ],
         child: MaterialApp(

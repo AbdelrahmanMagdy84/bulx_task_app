@@ -1,11 +1,10 @@
-import 'package:bulx_task_app/widgets/savings/savings_card.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'savings_state.dart';
 
-class SavingsCubit extends Cubit<SavingsState> {
-  SavingsCubit() : super(SavingsInitial());
+class SavingsContentCubit extends Cubit<SavingsStatetState> {
+  SavingsContentCubit() : super(SavingsInitial());
   final moneyCountAnimationDuration = const Duration(seconds: 2);
 
   final ConfettiController _controllerBottomCenter =
@@ -15,8 +14,8 @@ class SavingsCubit extends Cubit<SavingsState> {
 
   double getSavingsAmount() => _savings;
 
-  static SavingsCubit get(BuildContext context) =>
-      BlocProvider.of<SavingsCubit>(context);
+  static SavingsContentCubit get(BuildContext context) =>
+      BlocProvider.of<SavingsContentCubit>(context);
 
   ConfettiController getConfettiController() {
     return _controllerBottomCenter;
@@ -25,14 +24,16 @@ class SavingsCubit extends Cubit<SavingsState> {
   void play() {
     if (state is SavingsInitial) {
       Future.delayed(moneyCountAnimationDuration, () {
-        _controllerBottomCenter.play();
-        emit(SavingsIdeal());
+        if (state is SavingsInitial) {
+          _controllerBottomCenter.play();
+          emit(SavingsCompleted());
+        }
       });
     }
   }
 
   @override
-  void onChange(Change<SavingsState> change) {
+  void onChange(Change<SavingsStatetState> change) {
     // TODO: implement onChange
     print(state);
     super.onChange(change);

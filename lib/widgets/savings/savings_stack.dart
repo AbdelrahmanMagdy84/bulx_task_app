@@ -22,27 +22,21 @@ class SavingsStackWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: SizedBox(
-                height: isPortrait(context) ? 9.h : 15.w,
+                height: isPortrait(context) ? 8.h : 15.w,
                 width: isPortrait(context) ? 50.w : 35.h,
                 child: LayoutBuilder(builder: (context, constraints) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 1,
-                        child: constraints.maxHeight >= 3.h
-                            ? yourTotalSavingsTextBuiler(constraints)
-                            : const SizedBox(),
-                      ),
+                          flex: 1,
+                          child: yourTotalSavingsTextBuiler(constraints)),
                       Expanded(
-                        flex: 2,
+                        flex: 3,
                         child: SizedBox(
-                          height: constraints.maxHeight,
-                          width: constraints.maxWidth,
-                          child: constraints.maxHeight >= 4.h
-                              ? const SavingsMoneyWidget()
-                              : const SizedBox(),
-                        ),
+                            height: constraints.maxHeight,
+                            width: constraints.maxWidth,
+                            child: const SavingsMoneyWidget()),
                       ),
                     ],
                   );
@@ -59,14 +53,12 @@ class SavingsStackWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      constraints.maxHeight >= 3.h
-                          ? Expanded(
-                            child: FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: SavingsButton(),
-                              ),
-                          )
-                          : const SizedBox(),
+                      Expanded(
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: SavingsButton(),
+                        ),
+                      )
                     ],
                   );
                 }),
@@ -81,7 +73,7 @@ class SavingsStackWidget extends StatelessWidget {
   SizedBox yourTotalSavingsTextBuiler(BoxConstraints constraints) {
     return SizedBox(
       height: constraints.maxHeight,
-      width: constraints.maxWidth * 0.8,
+      width: constraints.maxWidth * 0.7,
       child: const FittedBox(
         fit: BoxFit.fitWidth,
         child: Text(
