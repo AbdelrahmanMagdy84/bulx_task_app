@@ -14,10 +14,16 @@ class SavingsAnimatedCardCubit extends Cubit<SavingsAnimatedCardState> {
   static SavingsAnimatedCardCubit get(BuildContext context) =>
       BlocProvider.of<SavingsAnimatedCardCubit>(context);
   Duration animateionDuration = const Duration(seconds: 1);
-  
+
   void play() {
     _isAnimatedCardHeight = true;
+
     emit(SavingsAnimatedCardPlayingState(_isAnimatedCardHeight));
+  }
+
+  void stop() {
+    _isAnimatedCardHeight = false;
+    emit(SavingsAnimatedCardFinishedState(_isAnimatedCardHeight));
   }
 
   @override
@@ -26,8 +32,6 @@ class SavingsAnimatedCardCubit extends Cubit<SavingsAnimatedCardState> {
     print(state);
     super.onChange(change);
   }
-
- 
 
   double getAnimationValue(
     AnimateType type,

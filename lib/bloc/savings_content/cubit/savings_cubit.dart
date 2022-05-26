@@ -5,10 +5,10 @@ part 'savings_state.dart';
 
 class SavingsContentCubit extends Cubit<SavingsStatetState> {
   SavingsContentCubit() : super(SavingsInitial());
-  final moneyCountAnimationDuration = const Duration(seconds: 2);
+  final moneyCountAnimationDuration = const Duration(seconds: 1);
 
   final ConfettiController _controllerBottomCenter =
-      ConfettiController(duration: const Duration(seconds: 1));
+      ConfettiController(duration: const Duration(seconds: 2));
 
   final double _savings = 2020.20;
 
