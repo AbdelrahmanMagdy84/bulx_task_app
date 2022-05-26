@@ -1,5 +1,6 @@
 import 'package:bulx_task_app/widgets/savings/savings_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sizer/sizer.dart';
 import '../../helpers/orientation_function.dart';
 import '../shared/best_image_size.dart';
@@ -19,43 +20,79 @@ class SavingsStackWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: isPortrait(context) ? 30.w : 30.h,
-                    child: const FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        "Your Total Savings",
-                        style: TextStyle(
-                          color: Color(0xff75808a),
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "SFProText",
+              padding: const EdgeInsets.only(left: 10),
+              child: SizedBox(
+                height: isPortrait(context) ? 9.h : 15.w,
+                width: isPortrait(context) ? 50.w : 35.h,
+                child: LayoutBuilder(builder: (context, constraints) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: constraints.maxHeight >= 3.h
+                            ? yourTotalSavingsTextBuiler(constraints)
+                            : const SizedBox(),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: SizedBox(
+                          height: constraints.maxHeight,
+                          width: constraints.maxWidth,
+                          child: constraints.maxHeight >= 4.h
+                              ? const SavingsMoneyWidget()
+                              : const SizedBox(),
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const SavingsMoneyWidget(),
-                ],
+                    ],
+                  );
+                }),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(right: isPortrait(context) ? 20 : 30),
-              width: isPortrait(context) ? 30.w : 20.h,
-              child: const FittedBox(
-                fit: BoxFit.fitWidth,
-                child: SavingsButton(),
+            SizedBox(
+              height: isPortrait(context) ? 8.h : 14.w,
+              width: isPortrait(context) ? 35.w : 35.h,
+              child: Container(
+                margin: EdgeInsets.only(right: isPortrait(context) ? 20 : 30),
+                child: LayoutBuilder(builder: (context, constraints) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      constraints.maxHeight >= 3.h
+                          ? Expanded(
+                            child: FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: SavingsButton(),
+                              ),
+                          )
+                          : const SizedBox(),
+                    ],
+                  );
+                }),
               ),
             )
           ],
         ),
       ],
+    );
+  }
+
+  SizedBox yourTotalSavingsTextBuiler(BoxConstraints constraints) {
+    return SizedBox(
+      height: constraints.maxHeight,
+      width: constraints.maxWidth * 0.8,
+      child: const FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Text(
+          "Your Total Savings",
+          style: TextStyle(
+            color: Color(0xff75808a),
+            fontWeight: FontWeight.w600,
+            fontFamily: "SFProText",
+          ),
+        ),
+      ),
     );
   }
 }
